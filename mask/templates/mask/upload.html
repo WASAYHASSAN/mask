@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mask Detector</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container py-5">
+    <h2 class="text-center mb-4">😷 Mask Detector</h2>
+
+    <!-- Upload Form -->
+    <div class="card shadow-sm p-4">
+        <form method="post" enctype="multipart/form-data" class="text-center">
+            {% csrf_token %}
+            <input type="file" name="image" accept="image/*" class="form-control mb-3" onchange="previewImage(event)">
+            <button type="submit" class="btn btn-primary">Detect Mask</button>
+        </form>
+    </div>
+
+    <!-- Preview -->
+    <div class="text-center mt-4">
+        <img id="preview" src="#" alt="Preview" style="max-width: 400px; display:none;" class="img-fluid rounded shadow">
+    </div>
+
+    <!-- Result -->
+    {% if result_url %}
+    <div class="text-center mt-4">
+        <h5>Detection Result:</h5>
+        <img src="{{ result_url }}" alt="Detection Result" class="img-fluid rounded shadow border">
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function previewImage(event) {
+    const preview = document.getElementById('preview');
+    preview.src = URL.createObjectURL(event.target.files[0]);
+    preview.style.display = 'block';
+}
+</script>
+
+</body>
+</html>
