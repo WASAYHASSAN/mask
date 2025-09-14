@@ -1,1 +1,1 @@
-web: gunicorn mask.wsgi
+web: gunicorn mask_site.wsgi
